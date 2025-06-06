@@ -41,7 +41,8 @@ Es steht **symbolisch für das Überschreiten technischer Grenzen – und das Ve
 - Klassisches TicTacToe in Python (Konsole)
 - Sauber strukturierter Code mit Fokus auf Lesbarkeit
 - Modular aufgebaut – ideal als Einstieg für Erweiterungen
-- Optionale Erweiterung: KI-Gegner / LLM-Modul / Retro-Interface
+- Einfacher KI-Gegner blockiert den menschlichen Spieler
+- Optionale Erweiterung: LLM-Modul / Retro-Interface
 
 ---
 

@@ -57,11 +57,50 @@ def check_winner(board):
 
     return None  # No winner yet
 
-# radom entry by the computer
+# random entry by the computer
 def random_move(board, player):
     empty_cells = [(i, j) for i in range(3) for j in range(3) if board[i][j] == ' ']
     if empty_cells:
         row, col = random.choice(empty_cells)
+        board[row][col] = player
+        return True
+    return False
+
+# find a winning or blocking move for the given player symbol
+def find_best_move(board, player):
+    opponent = 'X' if player == 'O' else 'O'
+    empty_cells = [(i, j) for i in range(3) for j in range(3) if board[i][j] == ' ']
+
+    # Try to win
+    for row, col in empty_cells:
+        board[row][col] = player
+        if check_winner(board) == player:
+            board[row][col] = ' '
+            return row, col
+        board[row][col] = ' '
+
+    # Block opponent
+    for row, col in empty_cells:
+        board[row][col] = opponent
+        if check_winner(board) == opponent:
+            board[row][col] = ' '
+            return row, col
+        board[row][col] = ' '
+
+    # Take center if free
+    if board[1][1] == ' ':
+        return 1, 1
+
+    # Choose random cell as fallback
+    if empty_cells:
+        return random.choice(empty_cells)
+    return None
+
+# computer move using basic strategy
+def computer_move(board, player='O'):
+    move = find_best_move(board, player)
+    if move:
+        row, col = move
         board[row][col] = player
         return True
     return False
@@ -98,8 +137,8 @@ def play_tic_tac_toe():
             # Add a slight delay to make it feel more natural
             time.sleep(1)
             
-            if random_move(board, current_player):
-                print(f"Computer placed an 'O'")
+            if computer_move(board, current_player):
+                print(f"Computer placed an '{current_player}'")
                 moves_count += 1
         
         # Check if game is over
