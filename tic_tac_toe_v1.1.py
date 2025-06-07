@@ -1,4 +1,4 @@
-# Tic Tac Toe Game v1.1
+# Tic Tac Toe Game v1.2
 # designed by:
 #   ██████  ██       ██  ██    ██ ███████ ██████  
 #  ██    ██ ██       ██  ██    ██ ██      ██   ██ 
