@@ -1,4 +1,4 @@
-# Tic Tac Toe Game v1.2
+# Tic Tac Toe Game v1.3
 # designed by:
 #   ██████  ██       ██  ██    ██ ███████ ██████  
 #  ██    ██ ██       ██  ██    ██ ██      ██   ██ 
@@ -105,6 +105,33 @@ def computer_move(board, player='O'):
         return True
     return False
 
+
+def play_computer_vs_computer(num_games=1, delay=0.5):
+    """Simulate games where two computer players compete."""
+    for game in range(1, num_games + 1):
+        print(f"\n=== Computer vs Computer Game {game} ===")
+        board = create_board()
+        current_player = 'X'
+        moves_count = 0
+
+        while True:
+            # Computer makes a move
+            computer_move(board, current_player)
+            moves_count += 1
+            print_board(board)
+            time.sleep(delay)
+
+            winner = check_winner(board)
+            if winner:
+                print(f"Winner: {winner}\n")
+                break
+
+            if moves_count == 9:
+                print("Draw!\n")
+                break
+
+            current_player = 'O' if current_player == 'X' else 'X'
+
 def play_tic_tac_toe():
     board = create_board()
     current_player = 'X'
@@ -159,5 +186,15 @@ def play_tic_tac_toe():
 
         # Switch players
         current_player = 'O' if current_player == 'X' else 'X'
-        
-play_tic_tac_toe()
+
+
+if __name__ == "__main__":
+    choice = input("Select mode: [1] Play manually  [2] Computer vs Computer: ")
+    if choice.strip() == '2':
+        try:
+            games = int(input("How many games should be simulated?: "))
+        except ValueError:
+            games = 1
+        play_computer_vs_computer(games)
+    else:
+        play_tic_tac_toe()
