@@ -5,7 +5,7 @@
 #  ██    ██ ██       ██  ██    ██ █████   ██████  
 #  ██    ██ ██       ██   ██  ██  ██      ██   ██ 
 #   ██████  ███████  ██    ████   ███████ ██   ██ 
-
+# (c) 2025 by oliver@devtron.pro
 import random
 import time
 from pyfiglet import Figlet
