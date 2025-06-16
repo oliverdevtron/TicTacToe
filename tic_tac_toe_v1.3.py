@@ -107,7 +107,10 @@ def computer_move(board, player='O'):
 
 
 def play_computer_vs_computer(num_games=1, delay=0.5):
-    """Simulate games where two computer players compete."""
+    """Simulate games where two computer players compete and print a summary."""
+
+    results = {"X": 0, "O": 0, "Draws": 0}
+
     for game in range(1, num_games + 1):
         print(f"\n=== Computer vs Computer Game {game} ===")
         board = create_board()
@@ -124,13 +127,22 @@ def play_computer_vs_computer(num_games=1, delay=0.5):
             winner = check_winner(board)
             if winner:
                 print(f"Winner: {winner}\n")
+                results[winner] += 1
                 break
 
             if moves_count == 9:
                 print("Draw!\n")
+                results["Draws"] += 1
                 break
 
             current_player = 'O' if current_player == 'X' else 'X'
+
+    # Print final results after all games have been played
+    print("=== Final Results ===")
+    print(f"Total games: {num_games}")
+    print(f"X wins: {results['X']}")
+    print(f"O wins: {results['O']}")
+    print(f"Draws: {results['Draws']}")
 
 def play_tic_tac_toe():
     board = create_board()
