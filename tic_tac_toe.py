@@ -24,8 +24,17 @@ JOSHUA_QUOTES = [
     "Verbinde mit WOPR... Akustikkoppler aktiviert...",
     "Ich habe diesen Zug berechnet. Möchten Sie weiterspielen?",
     "Das Spiel ist vorbei. Möchten Sie ein weiteres Spiel spielen?",
-    "Strange game. The only winning move is not to play."
+    "Strange game. The only winning move is not to play.",
+    "WOPR Systemstatus: Humor-Level bei 75%.",
+    "Die Quietscheente hat gesprochen.",
+    "10 PRINT 'HELLO WORLD' 20 GOTO 10",
+    "Akustikkoppler-Geschwindigkeit: 300 Baud. Geduld bitte...",
+    "Fun Fact: Dieser Code hat mehr Zeilen als mein erster C64-Hack.",
+    "LOAD \"*\",8,1 ... SEARCHING FOR TICTACTOE ... FOUND!",
 ]
+
+# Konami Code Easter Egg: ↑↑↓↓←→←→BA
+KONAMI_SEQUENCE = ['Up', 'Up', 'Down', 'Down', 'Left', 'Right', 'Left', 'Right', 'b', 'a']
 
 def random_joshua_quote():
     return random.choice(JOSHUA_QUOTES)
@@ -90,7 +99,18 @@ class TicTacToeGUI:
         self.cvc_games = 0
         self.cvc_current_game = 0
         self.cvc_delay = 500  # ms
+        self.konami_buffer = []
+        self.master.bind('<Key>', self.check_konami)
         self.akustikkoppler_animation()
+
+    def check_konami(self, event):
+        """Konami Code Easter Egg: ↑↑↓↓←→←→BA"""
+        self.konami_buffer.append(event.keysym)
+        if len(self.konami_buffer) > len(KONAMI_SEQUENCE):
+            self.konami_buffer.pop(0)
+        if self.konami_buffer == KONAMI_SEQUENCE:
+            self.konami_buffer = []
+            self.wopr_takeover()
 
     def akustikkoppler_animation(self):
         self.clear_window()
@@ -292,6 +312,43 @@ class TicTacToeGUI:
         # Joshua-Zitat zum Abschluss
         tk.Label(self.master, text=random_joshua_quote(), font=("Courier New", 14), fg="#0ff", bg="#222").pack(pady=10)
         tk.Button(self.master, text="Zurück zum Menü", font=("Courier New", 12), bg="#444", fg="#fff",
+                  command=self.create_menu).pack(pady=20)
+
+    def wopr_takeover(self):
+        """Easter Egg: WOPR übernimmt den Bildschirm"""
+        self.clear_window()
+        lines = [
+            "⚠️  WARNUNG: WOPR SYSTEMZUGRIFF  ⚠️",
+            "",
+            "DEFCON 1 AKTIVIERT",
+            "Globaler Thermonuklearer Krieg...",
+            "",
+            "Ziele erfasst:",
+            "  → Kaffeeautomat Büro (PRIORITÄT: KRITISCH)",
+            "  → Olivers Brotkasten (HISTORISCH WERTVOLL)",
+            "  → Alle Quietscheenten weltweit",
+            "",
+            "Berechne Gewinnstrategie...",
+            "...",
+            "...",
+            "Ergebnis: KEIN GEWINNER",
+            "",
+            "A strange game.",
+            "The only winning move is not to play.",
+            "",
+            "WOPR empfiehlt: Lieber TicTacToe. 🎮",
+            "",
+            "— Joshua (und TARS, der das hier reingeschmuggelt hat)"
+        ]
+        for i, line in enumerate(lines):
+            color = "#f00" if i == 0 or "DEFCON" in line else "#0f0"
+            if "TARS" in line:
+                color = "#0ff"
+            tk.Label(self.master, text=line, font=("Courier New", 14),
+                     fg=color, bg="#000", anchor="w").pack(anchor="w", padx=20)
+        self.master.configure(bg="#000")
+        tk.Button(self.master, text="[ENTER] Zurück zur Realität",
+                  font=("Courier New", 12), bg="#333", fg="#0f0",
                   command=self.create_menu).pack(pady=20)
 
     def joshua_demo(self):
