@@ -7,7 +7,6 @@
 #   ██████  ███████  ██    ████   ███████ ██   ██ 
 # (c) 2025-2026 by oliver@devtron.pro
 import random
-# import time  # reserved for future use
 import tkinter as tk
 from tkinter import messagebox, simpledialog
 
