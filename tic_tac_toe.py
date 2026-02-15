@@ -85,7 +85,7 @@ def computer_move(board, player='O'):
 class TicTacToeGUI:
     def __init__(self, master):
         self.master = master
-        master.title("Tic Tac Toe - Joshua Edition")
+        master.title(f"Tic Tac Toe - Joshua Edition | {random_joshua_quote()}")
         master.configure(bg="#222")
         self.board = create_board()
         self.buttons = [[None for _ in range(3)] for _ in range(3)]
