@@ -42,7 +42,7 @@ Es steht **symbolisch für das Überschreiten technischer Grenzen – und das Ve
 - Sauber strukturierter Code mit Fokus auf Lesbarkeit
 - Modular aufgebaut – ideal als Einstieg für Erweiterungen
 - Player vs Player Modus (Mensch vs Mensch)
-- Palyer vs Computer
+- Player vs Computer
 - Einfacher KI-Gegner blockiert den menschlichen Spieler
 - Computer vs Computer Modus (zum zuschauen wie der Computer spielt)
 - Optionale Erweiterung: Lernfähigkeit (Maschinen basiertes Lernen) / LLM-Modul / Retro-Interface
